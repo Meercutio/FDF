@@ -29,15 +29,14 @@ typedef struct	s_data
 
 typedef struct	s_mtx
 {
-	int		height;
-	int		width;
-	int		**z_matrix;
+	int		height;//y
+	int		width;//x
+	int		**z_matrix;//z
 	int		zoom;
 	int 	color;
 	int		shift_x;
 	int 	shift_y;
-	double	angle;
-//	char	*img;
+	float	angle;
 
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -66,5 +65,6 @@ void	ft_isometric(float *x, float *y, int z, t_mtx *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	ft_error(char *msg);
 void	free_data_z(t_mtx *data);
+void	check_dir(char *file_name);
 
 # endif

@@ -14,7 +14,8 @@
 
 int	is_key(int key)
 {
-	return (key == 126 || key == 125 || key == 124 || key == 123);
+	return (key == 126 || key == 125 || key == 124 || key == 123
+		|| key == 24 || key == 27);
 }
 
 void	exec_key(int key, t_mtx *data)
@@ -27,6 +28,10 @@ void	exec_key(int key, t_mtx *data)
 		data->shift_x += 10;
 	if (key == 123)
 		data->shift_x -= 10;
+	if (key == 24)
+		data->zoom += 10;
+	if (key == 27)
+		data->zoom -= 10;
 }
 
 void	full_black(t_mtx *data)
@@ -44,19 +49,6 @@ void	full_black(t_mtx *data)
 	}
 }
 
-void	free_data_z(t_mtx *data)
-{
-	int	i;
-
-	i = data->height - 1;
-	while (i >= 0)
-	{
-		free(data->z_matrix[i]);
-		i--;
-	}
-	free(data->z_matrix);
-}
-
 int	ft_deal_key(int key, t_mtx *data)
 {
 	if (is_key(key))
@@ -71,7 +63,7 @@ int	ft_deal_key(int key, t_mtx *data)
 	if (key == 53)
 	{
 		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		free_data_z(data);
+//		free_data_z(data);
 		free(data);
 		exit(0);
 	}

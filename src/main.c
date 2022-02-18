@@ -15,7 +15,9 @@
 void	set_param_z_a(t_mtx *data)
 {
 	data->zoom = 10;
-	data->angle = 0.8;
+	data->angle = 0.55;
+	data->shift_x = 200;
+	data->shift_y = 200;
 }
 
 int	main(int argc, char **argv)

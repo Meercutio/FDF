@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/10/05 17:43:14 by jlucile           #+#    #+#             */
+/*   Updated: 2021/10/05 17:43:15 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+# include <fcntl.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include "libft.h"
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
+int		get_next_line(int fd, char **line);
 
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
-}
+#endif

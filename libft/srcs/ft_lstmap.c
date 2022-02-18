@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/09/23 16:08:47 by jlucile           #+#    #+#             */
+/*   Updated: 2021/09/23 16:08:48 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/libft.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*dst;
+	t_list	*new_lst;
+	t_list	*new_elem;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
+	if (!lst)
+		return (NULL);
+	new_lst = NULL;
+	while (lst)
+	{
+		new_elem = ft_lstnew((*f)(lst->content));
+		if (!new_elem)
+		{
+			ft_lstclear(&new_lst, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_lst, new_elem);
+		lst = lst->next;
+	}
+	return (new_lst);
 }

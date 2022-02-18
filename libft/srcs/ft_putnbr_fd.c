@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/09/23 16:10:19 by jlucile           #+#    #+#             */
+/*   Updated: 2021/09/23 16:10:20 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/libft.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
+	if (n == -2147483648)
+		ft_putstr_fd("-2147483648", fd);
+	else
+	{	
+		if (n < 0)
+		{	
+			ft_putstr_fd("-", fd);
+			n *= -1;
+		}
+		if (n >= 10)
+			ft_putnbr_fd(n / 10, fd);
+		ft_putchar_fd((char)(n % 10 + '0'), fd);
+	}
 }

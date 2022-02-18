@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/09/23 16:11:12 by jlucile           #+#    #+#             */
+/*   Updated: 2021/09/23 16:11:13 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/libft.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*dst;
+	char	*trim;
+	size_t	len;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
+	if (!s1 || !set)
+		return (NULL);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	len = ft_strlen(s1);
+	while (len && ft_strchr(set, s1[len]))
+		len--;
+	trim = ft_substr(s1, 0, len + 1);
+	return (trim);
 }

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/09/23 16:10:37 by jlucile           #+#    #+#             */
+/*   Updated: 2021/09/23 16:10:38 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/libft.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+char	*ft_strdup(const char *s1)
 {
-	char	*dst;
+	char	*ptr;
+	size_t	n;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
+	n = ft_strlen(s1);
+	ptr = (char *)malloc(n + 1);
+	if (!ptr)
+		return (NULL);
+	ft_strlcpy(ptr, s1, n + 1);
+	return (ptr);
 }

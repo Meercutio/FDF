@@ -30,7 +30,7 @@ void	add_shift(t_coord *coord, t_mtx *data)
 
 void	set_param(t_coord *coord, t_mtx *data)
 {
-	coord->fx1 = coord->x1;
+	coord->fx1 = (float)coord->x1;
 	coord->fx2 = coord->x2;
 	coord->fy1 = coord->y1;
 	coord->fy2 = coord->y2;
@@ -54,8 +54,8 @@ void	bresenham(t_coord coord, t_mtx *data)
 	ft_isometric(&coord.fx1, &coord.fy1, z[0], data);
 	ft_isometric(&coord.fx2, &coord.fy2, z[1], data);
 	add_shift(&coord, data);
-	x_step = coord.fx2 - coord.fx1;
-	y_step = coord.fy2 - coord.fy1;
+	x_step = coord.fx2 - coord.fx1;//2 - 11
+	y_step = coord.fy2 - coord.fy1;//2 - 5
 	max = ft_max(ft_abs(x_step), ft_abs(y_step));
 	x_step /= max;
 	y_step /= max;

@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   ft_proc_char.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/09/23 16:09:38 by jlucile           #+#    #+#             */
+/*   Updated: 2021/09/23 16:09:39 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/ft_printf.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+size_t	ft_proc_char(t_flags *flags, char c)
 {
-	char	*dst;
+	size_t	len;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
+	len = 0;
+	if (flags->minus == 1)
+		write(1, &c, 1);
+	len += ft_add_width(flags->width, 1, flags->zero);
+	if (flags->minus == 0)
+		write(1, &c, 1);
+	len++;
+	return (len);
 }

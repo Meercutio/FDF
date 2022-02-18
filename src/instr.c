@@ -33,3 +33,30 @@ float	ft_abs(float num)
 	else
 		return (num);
 }
+
+void	free_data_z(t_mtx *data)
+{
+	int	i;
+
+	i = data->height;
+	while (i >= 0)
+	{
+		free(data->z_matrix[i]);
+		i--;
+	}
+	free(data->z_matrix);
+}
+
+void	check_dir(char *file_name)
+{
+	int	fd;
+
+	fd = open(file_name, O_DIRECTORY);
+	if (fd > 0)
+	{
+		close(fd);
+		ft_printf("File is a directory\n");
+		exit(1);
+	}
+	close(fd);
+}

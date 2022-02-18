@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/09/23 16:11:08 by jlucile           #+#    #+#             */
+/*   Updated: 2021/09/23 16:11:09 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/libft.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*dst;
+	char			*s1;
+	unsigned char	c1;
+	int				n;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
+	s1 = (char *)s;
+	c1 = (unsigned char)c;
+	n = ft_strlen(s);
+	while (c1 == '\0' || n >= 0)
+	{
+		if (s1[n] == c1)
+			return (&s1[n]);
+		n--;
+	}
+	return (NULL);
 }

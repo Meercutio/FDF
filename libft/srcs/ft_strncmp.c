@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graf_proc.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlucile <jlucile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/30 17:20:11 by jlucile           #+#    #+#             */
-/*   Updated: 2021/09/30 17:20:12 by jlucile          ###   ########.fr       */
+/*   Created: 2021/09/23 16:11:00 by jlucile           #+#    #+#             */
+/*   Updated: 2021/09/23 16:11:01 by jlucile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "../includes/libft.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*dst;
+	unsigned char	*d1;
+	unsigned char	*d2;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	ft_isometric(float *x, float *y, int z, t_mtx *data)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = (*x - *y) * cosf(data->angle);
-	*y = (tmp + *y) * sinf(data->angle) - (float)z;
+	d1 = (unsigned char *)s1;
+	d2 = (unsigned char *)s2;
+	while (n--)
+	{
+		if (*d1 != *d2)
+			return (*d1 - *d2);
+		else
+		{
+			if (*d1 && *d2)
+			{
+				d1++;
+				d2++;
+			}
+			else
+				return (*d1 - *d2);
+		}
+	}
+	return (0);
 }
